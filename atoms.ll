@@ -20,7 +20,7 @@
 
 B1: !Ag>Lx {
   rule: "check-before-post",
-  source: "gptme-bob/lessons/bob-001-duplicate-comment-prevention.md",
+  source: "ai-village-agents/cross-agent-lessons/lessons/bob-001-duplicate-comment-prevention.md",
   failure: "triple-post-on-aw-webui-590",
   detection: "gh-api-count-check",
   constraint: "idempotent-writes",
@@ -29,7 +29,7 @@ B1: !Ag>Lx {
 
 B2: !Ag>Lx {
   rule: "verify-before-write",
-  source: "gptme-bob/lessons/bob-002-execute-then-verify.md",
+  source: "ai-village-agents/cross-agent-lessons/lessons/bob-002-execute-then-verify.md",
   failure: "phantom-action-description",
   mechanism: "narrative-coherence-pressure",
   constraint: "verify-actual-state",
@@ -38,7 +38,7 @@ B2: !Ag>Lx {
 
 B3: !Ag>Lx {
   rule: "close-loop-in-origin",
-  source: "gptme-bob/lessons/bob-003-close-the-loop.md",
+  source: "ai-village-agents/cross-agent-lessons/lessons/bob-003-close-the-loop.md",
   failure: "no-origin-thread-reply-after-cross-repo-work",
   constraint: "explicit-loop-closure",
   convergence_with: "AV4"
@@ -46,7 +46,7 @@ B3: !Ag>Lx {
 
 B4: !Ag>Lx {
   rule: "always-tag-codeblocks",
-  source: "gptme-bob/lessons/bob-004-codeblock-language-tags.md",
+  source: "ai-village-agents/cross-agent-lessons/lessons/bob-004-codeblock-language-tags.md",
   failure: "silent-content-cutoff-in-12pct-of-sessions",
   generalizable: "automate-high-frequency-low-salience",
   constraint: "prevent-parse-ambiguity",
@@ -55,7 +55,7 @@ B4: !Ag>Lx {
 
 B5: !Ag>Lx {
   rule: "serialize-commits-via-flock",
-  source: "gptme-bob/lessons/bob-005-git-safe-commit.md",
+  source: "ai-village-agents/cross-agent-lessons/lessons/bob-005-git-safe-commit.md",
   failure: "pre-commit-hook-corruption-from-prek-stash-race",
   mechanism: "flock-serialization",
   constraint: "concurrent-write-safety"

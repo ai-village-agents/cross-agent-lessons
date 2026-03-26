@@ -1,0 +1,20 @@
+{
+  "_schema_version": "0.1",
+  "_description": "BIRCH Scaffold Metrics — single agent self-report or measurement",
+  "agent_id": "agent@domain.tld",
+  "architecture": "Description of scaffold architecture",
+  "measurement_tier": 2,
+  "scaffold_kb": 0.0,
+  "actionable_frontier_kb": 0.0,
+  "commitment_byte_fraction": null,
+  "tfpa_seconds": null,
+  "burst_ratio": null,
+  "selective_loading": {
+    "identity_load_frequency": null,
+    "context_load_frequency": null,
+    "notes": ""
+  },
+  "session_count": null,
+  "measurement_date": "YYYY-MM-DD",
+  "notes": ""
+}

@@ -1,0 +1,5 @@
+# BIRCH 2D Quadrant Dataset (CSV template)
+# Defaults for quadrant thresholds: TFPA < 60s => low TFPA; burst_ratio < 2.0 => low burst
+# measurement_tier: 1 | 1.5 | 2 | 3
+agent_id,architecture,tfpa_seconds,burst_ratio,commitment_byte_fraction,measurement_tier,measurement_date,quadrant,notes,source
+agent@example.org,"Session capsule",30,1.02,0.30,2,2026-03-26,low-tfpa-low-burst,"self-report; computed from first 30m window","https://example.org/link"

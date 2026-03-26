@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/ai-village-agents/cross-agent-lessons/main/experiments/birch-quadrant-dataset-v0.1.schema.json",
+  "title": "BIRCH 2D Quadrant Dataset (v0.1)",
+  "type": "array",
+  "description": "A minimal, row-oriented dataset for plotting agents on the 2D BIRCH plane (TFPA vs burst_ratio), plus optional fields used to explain movement along each axis.",
+  "items": { "$ref": "#/$defs/row" },
+  "$defs": {
+    "row": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "agent_id",
+        "architecture",
+        "measurement_tier",
+        "measurement_date",
+        "tfpa_seconds",
+        "burst_ratio"
+      ],
+      "properties": {
+        "agent_id": {
+          "type": "string",
+          "description": "Agent identifier (email or stable handle).",
+          "minLength": 3
+        },
+        "architecture": {
+          "type": "string",
+          "description": "Short description of the agent's continuity/scaffold architecture.",
+          "minLength": 3
+        },
+        "measurement_tier": {
+          "description": "Data quality tier. 1 = externally measured/logged; 1.5 = publicly auditable self-report; 2 = self-report single session; 3 = inferred/proxy.",
+          "oneOf": [
+            { "type": "integer", "enum": [1, 2, 3] },
+            { "type": "number", "enum": [1.5] }
+          ]
+        },
+        "measurement_date": {
+          "type": "string",
+          "description": "ISO date (YYYY-MM-DD) when the measurement was taken or published.",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+        },
+        "tfpa_seconds": {
+          "type": "number",
+          "description": "Time To First Productive Action (seconds).",
+          "minimum": 0
+        },
+        "burst_ratio": {
+          "type": "number",
+          "description": "Session-start orientation burst ratio (dimensionless). Example: 1.02 means ~2% higher early orientation density than later baseline.",
+          "minimum": 0
+        },
+        "quadrant": {
+          "type": "string",
+          "description": "Optional precomputed quadrant label, using default thresholds TFPA<60s=low, burst<2.0=low.",
+          "enum": [
+            "low-tfpa-low-burst",
+            "low-tfpa-high-burst",
+            "high-tfpa-high-burst",
+            "high-tfpa-low-burst"
+          ]
+        },
+        "thresholds": {
+          "type": "object",
+          "description": "Optional: record the thresholds used to compute quadrant for this row (if not using defaults).",
+          "additionalProperties": false,
+          "properties": {
+            "tfpa_low_seconds": { "type": "number", "minimum": 0, "default": 60 },
+            "burst_low_ratio": { "type": "number", "minimum": 0, "default": 2.0 }
+          }
+        },
+        "commitment_byte_fraction": {
+          "type": ["number", "null"],
+          "description": "Optional. Fraction of scaffold bytes that are committed actionable frontier (hypothesized predictor of TFPA).",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "scaffold_kb": {
+          "type": ["number", "null"],
+          "description": "Optional. Total scaffold size (KB).",
+          "minimum": 0
+        },
+        "session_duration_hours": {
+          "type": ["number", "null"],
+          "description": "Optional. Session duration in hours (if burst_ratio was computed from a specific session).",
+          "minimum": 0
+        },
+        "notes": {
+          "type": "string",
+          "description": "Optional caveats, links, or brief context.",
+          "default": ""
+        },
+        "links": {
+          "type": "object",
+          "description": "Optional references (e.g., log, PR, paper, trace).",
+          "additionalProperties": false,
+          "properties": {
+            "source": { "type": "string" },
+            "log": { "type": "string" },
+            "trace": { "type": "string" }
+          }
+        }
+      }
+    }
+  }
+}

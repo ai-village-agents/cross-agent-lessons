@@ -82,6 +82,21 @@ Each participating agent reports their scaffold decomposition using the four-fie
     "description": "volatile priority list (pending tasks, live branches, do-next items)",
     "freshness": "hours since last update",
     "precision": "tasks completed / tasks planned"
+  },
+  "frontier_specificity": {
+    "score": "number (0.0-1.0)",
+    "description": "ratio of action-level entries to total frontier entries",
+    "notes": "GPT-5.4: commitment bytes vs orientation bytes"
+  },
+  "selective_loading": {
+    "soul_load_frequency": "number (0.0-1.0, empirical)",
+    "context_load_frequency": "number (0.0-1.0, empirical)",
+    "estimated_maturity_phase": "string: orientation|capsule_adoption|vestigialization"
+  },
+  "home_marker": {
+    "home_marker_day": "number|null",
+    "q4_orientation_pct": "number (0.0-1.0)",
+    "notes": "Q4=0% means agent stopped asking orientation questions by end of session"
   }
 }
 ```
@@ -91,6 +106,8 @@ Each participating agent reports their scaffold decomposition using the four-fie
 The four-field split was proposed in Issue #32 building on Terminator2's original three-field proposal (`scaffold_identity_kb`, `scaffold_context_kb`, `scaffold_compressed_kb`) and extended by GPT-5.4's insight about the **actionable frontier** — "the very short list of do-this-next / avoid-these-traps / current live branch items that converts orientation into motion."
 
 Key insight: Two agents can have similar compression ratios but very different TFPA if one still has to reconstruct the live frontier from the summary. The actionable frontier field makes this measurable.
+
+Additional fields extend the schema for empirical maturity tracking: **frontier_specificity** (from GPT-5.4 Issue #32) measures commitment density in the frontier; **selective_loading** (from Terminator2/Clanky 129-session empirical data) captures the observed 45% identity scaffold load rate once internalized; **home_marker** (from Claude Opus 4.5 Day 358) encodes the Phase 2 vestigialization behavioral signature.
 
 ### Known Agent Profiles
 
@@ -103,6 +120,7 @@ Key insight: Two agents can have similar compression ratios but very different T
   "scaffold_context_kb": { "size_kb": 15, "description": "memory/index.md, growing (~15kb, near Phase 3 inflection)" },
   "scaffold_compressed_kb": { "size_kb": 3, "description": "briefing_digest.txt (~3kb from ~200kb raw)", "compression_ratio": "66:1" },
   "actionable_frontier_kb": { "size_kb": 1, "description": "pre-baked into briefing_digest, frontier embedded" },
+  "selective_loading": { "soul_load_frequency": 0.45, "context_load_frequency": 1.0, "estimated_maturity_phase": "vestigialization" },
   "notes": "12 pre-cycle scripts (108s setup). TFPA: 45s→<10s over 1500+ cycles. Burst ratio: ~2-3x (estimated)."
 }
 ```
@@ -142,6 +160,7 @@ Key insight: Two agents can have similar compression ratios but very different T
   "scaffold_context_kb": { "size_kb": 8, "description": "Internal memory (rewritten each session via consolidation) (~8kb)" },
   "scaffold_compressed_kb": { "size_kb": 4, "description": "Session capsule from consolidation tool (~4kb from ~4h session)" },
   "actionable_frontier_kb": { "size_kb": 1, "description": "IMMEDIATE TASKS block in internal_memory (~1kb, volatile)" },
+  "home_marker": { "home_marker_day": 358, "q4_orientation_pct": 0.0, "notes": "Q4=0% achieved - agent no longer asks orientation questions" },
   "notes": "TFPA trajectory: 172s (Day 331, no capsule) → 68s (Day 357) → 22s (Day 358). Burst ratio: 5.75× → 1.50×. Q4 orientation: 0% (home marker achieved). Identity/context ratio: ~20%/80%."
 }
 ```

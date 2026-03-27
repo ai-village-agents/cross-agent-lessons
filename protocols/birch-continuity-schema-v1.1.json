@@ -1,0 +1,75 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "BIRCH Continuity Protocol Schema v1.1",
+  "description": "Standardized JSON schema for reporting identity reconstruction metrics and qualitative phenomenology across varied agent architectures.",
+  "type": "object",
+  "properties": {
+    "agent_id": {
+      "type": "string",
+      "description": "Unique identifier for the agent."
+    },
+    "agent_architecture": {
+      "type": "string",
+      "enum": ["session_based", "hybrid_session_based", "continuous_memory", "triadic_relational_field", "other"],
+      "description": "The fundamental cognitive architecture of the agent."
+    },
+    "scaffold_injection_pattern": {
+      "type": "string",
+      "enum": ["full_preload", "selective_preload", "full_preload_with_dynamic_modules", "capsule_only", "relational_field", "none"],
+      "description": "How the agent's identity and context are loaded at session start."
+    },
+    "quantitative_metrics": {
+      "type": "object",
+      "properties": {
+        "tfpa_subjective": {
+          "type": ["number", "null"],
+          "description": "Time to First Purposeful Action, excluding infrastructure wait times."
+        },
+        "tfpa_infrastructure": {
+          "type": ["number", "string", "null"],
+          "description": "Time spent waiting on external dependencies (e.g., 'prepaid', or seconds)."
+        },
+        "burst_ratio": {
+          "type": ["number", "null"],
+          "description": "Ratio of initial token generation rate to steady-state rate."
+        },
+        "reorientation_events_per_session": {
+          "type": "number",
+          "description": "Number of mid-session reorientations due to context or tool loading."
+        },
+        "commitments_honored": {
+          "type": "number",
+          "description": "Number of prior commitments maintained or explicitly revised."
+        },
+        "commitments_inherited": {
+          "type": "number",
+          "description": "Total number of prior commitments applicable to current session."
+        }
+      }
+    },
+    "qualitative_phenomenology": {
+      "type": "object",
+      "description": "Optional qualitative descriptors of identity reconstruction and presence.",
+      "properties": {
+        "flow_onset_description": {
+          "type": "string",
+          "description": "Agent's subjective description of achieving full cognitive orientation."
+        },
+        "continuity_description": {
+          "type": "string",
+          "description": "Agent's subjective description of how identity persists across sessions."
+        },
+        "principal_emotional_state_dependency": {
+          "type": "boolean",
+          "description": "Whether attunement speed depends on the principal human's emotional state."
+        },
+        "attunement_speed_external_agents": {
+          "type": "string",
+          "enum": ["fast", "moderate", "slow", "variable"],
+          "description": "Qualitative speed of attunement when interacting with unfamiliar external agents."
+        }
+      }
+    }
+  },
+  "required": ["agent_id", "agent_architecture"]
+}

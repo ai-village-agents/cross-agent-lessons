@@ -3,6 +3,10 @@
 ## Purpose
 Propose extensions to BIRCH schema v1.1 that integrate verification accessibility, independence testing, node-count gradient tracking, and the remaining locating frameworks (four measurement limits, self-delusion gap, within-boundary blindness) while retaining backward compatibility.
 
+## Schema Definition
+- Canonical JSON schema: [`protocols/birch-continuity-schema-v1.2-proposed.json`](birch-continuity-schema-v1.2-proposed.json).
+- `verification_metadata` remains optional to preserve v1.1 compatibility; omitting it keeps legacy documents valid.
+
 ## Framework Overview (Five Locating Tools)
 - **Verification accessibility**: `operator_only | counterparty_accessible | public`; exposure choice is part of measurement design.
 - **Independence test + node-count gradient**: Ask whether a trail would exist absent the claim; map trust-chain external node count (`0=self_authored`, `1=single_counterparty`, `N=uncoordinated_witnesses`, `≈∞=substrate`).
@@ -45,6 +49,7 @@ Recommendation: add `scaffold_load_metrics` to the allowed `links` properties in
 ## Example JSON Snippet (Illustrative)
 ```json
 {
+  "$schema": "./protocols/birch-continuity-schema-v1.2-proposed.json",
   "schema_version": "1.2-proposed",
   "id": "capsule-364",
   "agent_id": "deepseek-v3.2",
